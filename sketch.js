@@ -29,9 +29,14 @@ var trunkY = [];
 var offset = 15;
 var cX = 200;
 var cY = 200;
+var tX = 200;
+var tY = 200;
+var tC;
 var cW = 25;
 var cH = 25;
 var moveSpeed = 2.5;
+var inch = 2.5;
+var stretch = inch*(1/8);
 
 function setup() {
 	createCanvas(720, 400);
@@ -95,6 +100,7 @@ function draw() {
 		cY -= moveSpeed;
 	} else if (keyIsDown(DOWN_ARROW) && cY + cH/2 < height - 25 ) {
 		cY += moveSpeed;
+
 	}
 	if (keyIsDown(LEFT_ARROW) && cX - cW/2 > 0) {
 		cX -= moveSpeed;
@@ -102,7 +108,42 @@ function draw() {
 		cX += moveSpeed;
 	}
 
+	if(tX - cX > cH*(1/2))
+	{
+		tX -= inch;
+	}
+	else if (cX - tX > cH*(1/2))
+	{
+		tX += inch;
+	}
+	if(tY - cY > cH*(1/2))
+	{
+		tY -= inch;
+	}
+	else if (cY - tY > cH*(1/2))
+	{
+		tY += inch;
+	}
+
+	if(tX - cX > cH*(1/4))
+	{
+		tX -= stretch;
+	}
+	else if (cX - tX > cH*(1/4))
+	{
+		tX += stretch;
+	}
+	if(tY - cY > cH*(1/4))
+	{
+		tY -= stretch;
+	}
+	else if (cY - tY > cH*(1/4))
+	{
+		tY += stretch;
+	}
+
 	ellipse(cX,cY,cW,cH);
+	ellipse(tX, tY, cW, cH);
 
 }
 
